@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import config from '../config.json';
+import { prefix, token } from '../config.json';
 
 const client = new Discord.Client();
 
@@ -13,8 +13,6 @@ client.on('message', msg => {
   }
 });
 
-
-
-client.login(config.token)
+client.login(token)
   .then(() => console.log('Bot Logado'))
   .catch(err => console.log(err))
