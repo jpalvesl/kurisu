@@ -1,12 +1,12 @@
 import { Message, MessageEmbed } from 'discord.js';
-import { prefix } from '../../config.json';
+
 
 const helpEmbed = new MessageEmbed()
   .setAuthor('Ajuda do comando invite', 'https://cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png')
   .setThumbnail('https://cdn.discordapp.com/attachments/728421824521830452/730598731132436480/682055.png')
   .setDescription('Retorna para você um link de um convite OAuth e alguns outros links importantes.')
   .addFields([
-    { name: 'Modo de usar', value: `\`${prefix}inivite\`` },
+    { name: 'Modo de usar', value: `\`${process.env.PREFIX}inivite\`` },
   ])
   .setFooter('Não inclua <> ou [] no comando.')
 
@@ -16,7 +16,7 @@ module.exports = { // como está utilizando require para importar os comandos vo
   usage: helpEmbed,
   guildOnly: false,
 	description: 'Dá a você um link para adicionar o bot em no servidor que você quiser',
-	execute(message: Message, args: Array<string>) {
+	execute(message: Message, _: Array<string>) {
     const invite = new MessageEmbed()
       .setTitle('URL do convite da Kurisu')
       .setDescription('Aqui está a URL que é utilizada para você adicionar o bot em algum dos seus servidores do discord, caso você queira. **Obrigado por usar o bot**')
