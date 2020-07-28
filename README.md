@@ -5,10 +5,11 @@
   Kurisu Bot
 </h1>
 
-> Uma bot de discord criada com finalidade de aprender um pouco mais sobre typescript, e ainda ganhar um bot pra colocar no meu próprio servidor :relieved:
+> Uma bot de discord criada com finalidade de aprender um pouco mais sobre typescript, e ainda ganhar um bot pra colocar no meu próprio servidor 🤭
 
 <!-- Badges -->
 <p align="center">
+
   <!-- if your app is a website -->
   <a href="https://jpalvesl.github.io/kurisu-site" alt="Website jpalvesl.github.io/kurisu-site">
     <img src="https://img.shields.io/website-up-down-1EAE72-red/https/jpalvesl.github.io/kurisu-site" />
@@ -41,8 +42,11 @@
 
 ## :clipboard: Descrição
 A Kurisu é uma bot que não é focada em algo específico, porém ela possui alguns comandos bem interessantes de se usar, tendo comandos interativos, informativos, manipulação de imagem, dentre outros.
-Ela foi feita em typescript usando a biblioteca discord.js, suas principais inspirações foram GarticBot, Mantaro e Loritta, em especial a Mantaro, que deu a base inicial inteira e o conceito de como são mostradas as MessageEmbed's 
-O [site](https://jpalvesl.github.io/kurisu-site) foi muito inspirado no GarticBot e a forma de usar os comandos que parece que você está acessando alguma função de dentro do bot literalmente `ks.comando`, E da loritta algumas funções como a pokedex, criação de memes e codificar mensagens, com base64 e código morse
+Ela foi feita em typescript usando a biblioteca discord.js, suas principais inspirações foram GarticBot, Mantaro e Loritta, em especial a Mantaro, que deu a base inicial inteira e o conceito de como são mostradas as MessageEmbed's.
+
+Os comandos presentes podem ser consultados usando o comando `ks.help` que lista todos os comando presentes (caso você precise saber algo mais especifico pode digitar `ks.help <comando>`, que mostra o que o comando faz e como deve ser usado) ou no [site](https://jpalvesl.github.io/kurisu-site) da bot que inclusive foi muito inspirado no site do GarticBot juntamente com a forma de usar os comandos que parece que você está acessando algum método presente no bot literalmente `ks.comando`.
+
+A personagem usada para ser o rosto desse bot foi a Makise Kurisu de [Steins Gate](https://pt.wikipedia.org/wiki/Steins;Gate), sim esse desafio foi tudo com a intenção de indicar o anime pra a comunidade 🤪
 
 ## :rocket: Iniciando
 
@@ -104,17 +108,18 @@ Para Linux: `$ cp .env.example .env`
 
 ### :open_file_folder: API's utilizadas
 - [News API](https://newsapi.org)
-- [OpenWeatherMap API]()
+- [OpenWeatherMap API](https://openweathermap.org/api)
 - [Imgflip API](https://api.imgflip.com)
 - [Poke API](https://pokeapi.co)
 - [COVID-19 API](https://covid19api.com)
 - [Tenor API](https://tenor.com/gifapi)
 
-### Uma rápida olhada nos diretórios presentes dentro de `./src`.
+### Uma rápida olhada nos arquivos presentes dentro de `./src`.
 
     ./src
      ├── assets
      ├── commands
+     index.ts
 
 1.  **`assets`**: Pasta que guarda a ultima imagem filtrada que foi enviada para o discord.
 
@@ -126,6 +131,6 @@ This project is under the UNLICENSE. See the file [UNLICENSE](UNLICENSE) for mor
 
 ---
 
-Build with 💙 By [João Lima](https://github.com/jpalvesl)
+Construido com 💙 por [João Lima](https://github.com/jpalvesl)
 
-Based on the [readme template](https://gist.github.com/henry-ns/a00234378353d9ca43e1bfe043202192) by [Henrique Miranda](http://thehenry.dev/)
+Baseado no [readme template](https://gist.github.com/henry-ns/a00234378353d9ca43e1bfe043202192) por [Henrique Miranda](http://thehenry.dev/)
