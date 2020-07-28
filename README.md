@@ -74,6 +74,7 @@ Para Linux: `$ cp .env.example .env`
 | Opção         | Descrição                        | Obrigatório? |
 | ------------  | -------------------------------- | ------------ |
 | TOKEN         | Token de autenticação do seu bot | sim          |
+| CLIENT_ID     | ID da aplicação no discord       | sim          |
 | PREFIX        | Prefixo dos comandos             | sim          |
 | TENORKEY      | Key da Tenor API gif             | sim          |
 | WEATHERAPIKEY | Key do OpenWeatherMap API        | sim          |
