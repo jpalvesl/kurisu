@@ -14,8 +14,13 @@ export interface commandInterface {
 	execute: Function;
 }
 
+function isMusicCommand (command: commandInterface, musicCommands :Array<String>) {
+
+}
+
 const client = new Discord.Client();
 const commands: Discord.Collection<string, commandInterface> = new Discord.Collection();
+const queues : Map<String, Array<any>> = new Map();
 
 const commandFiles = fs.readdirSync(path.resolve(__dirname, 'commands')).filter(file => file.endsWith('.ts'))
 
@@ -48,6 +53,8 @@ client.on('message', message => {
     if (command.args && !args.length) 
       return message.channel.send(`Você não passou nenhum argumento, ${message.author}, para saber mais sobre o comando digite \`${process.env.PREFIX}help <comando>\``);
 
+    if (command.name === 'play') 
+      return command.execute(message, args, queues)
     
     command.execute(message, args, commands)
   } catch (error) {
