@@ -1,5 +1,6 @@
 import { Message, MessageEmbed } from 'discord.js';
 import search from 'yt-search';
+import ytdl from 'ytdl-core-discord';
 
 const helpEmbed = new MessageEmbed()
   .setAuthor('Ajuda do comando 8ball', 'https://cdn.pixabay.com/photo/2012/04/14/16/26/question-34499_960_720.png')
@@ -11,11 +12,44 @@ const helpEmbed = new MessageEmbed()
   ])
   .setFooter('Não inclua <> ou [] no comando.')
 
-  const playSong = (message: Message, args: Array<string>, queues: Map<String, Array<any>>, song: any) => {
+  const playSong = async (message: Message, args: Array<string>, queues: Map<String, Array<any>>, song: any) => {
+    let queue = queues.get(message.guild?.id)
+
     if (!song) {
-      console.log('Musica nao existe');
-      
+      if (queue) {
+        queue.connection.disconect()
+        queues.delete(message.member?.guild.id)
+      }
     }
+    if (!message.member?.voice.channel) {
+      return message.reply('Você precisa estar em um canal de voz para adicionar a música')
+    }
+
+    if (!queue) {
+      const conn = await message.member.voice.channel.join()
+      queue = {
+        volume: 10,
+        connection: conn,
+        dispatcher: null,
+        songs: [song]
+      }
+      queue.dispatcher = await queue.connection.play(await ytdl(song.url, {
+        highWaterMark: 1 << 25
+      }), {
+        type: 'opus'
+      })
+      queue.dispatcher.on('finish', () => {
+        queue.songs.shift()
+        playSong(message, args, queues, queue.songs[0])
+      })
+      queues.set(message.member.guild.id, queue)
+    }
+    else {
+      queue.songs.push(song)
+      queues.set(message.member.guild.id)
+    }
+
+
   }
 
 module.exports = { // como está utilizando require para importar os comandos vou usar o module.exports nessa parte
@@ -24,7 +58,7 @@ module.exports = { // como está utilizando require para importar os comandos vo
   usage: helpEmbed,
   guildOnly: true,
 	description: 'Escolhe uma música para tocar com base na url ou no nome da musica.',
-	async execute(message: Message, args: Array<string>, queues: Map<String, Array<any>>) {
+  execute(message: Message, args: Array<string>, queues: Map<String, Array<any>>) {
       const musicName = args.join(' ')
 
 
@@ -33,12 +67,12 @@ module.exports = { // como está utilizando require para importar os comandos vo
           if (err) {
             throw err
           }
-          else {
-            if (result && result.all.length > 0) {
+          else if (result && result.all.length > 0) { 
               const song = result.all[0]
-              console.log(song)
-            }
-
+              playSong(message, args, queues, song)
+          }
+          else {
+            return message.reply('Não conseguimos encontrar a música')
           }
         })        
       } catch (error) {
